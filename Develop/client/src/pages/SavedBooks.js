@@ -20,9 +20,10 @@ const SavedBooks = () => {
    const { loading, data } = useQuery(GET_ME);
    const userData = data?.me || {};
 
+   const [ removeBook, { error }]  = useMutation(REMOVE_BOOK);
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
-    const [ removeBook, { error }]  = useMutation(REMOVE_BOOK);
+    
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -30,14 +31,15 @@ const SavedBooks = () => {
     }
 
     try {
-      const response = await removeBook( {variables: {bookId, token}});
+      const { data } = await removeBook( {variables: {bookId}});
+      console.log(data);
 
       if (error) {
         throw new Error('something went wrong!');
       }
 
-      const updatedUser = await response.json();
-      setUserData(updatedUser);
+      // const updatedUser = await response.json();
+      // setUserData(updatedUser);
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
@@ -59,12 +61,12 @@ const SavedBooks = () => {
       </div>
       <Container>
         <h2 className='pt-5'>
-          {userData.savedBooks.length
+          {userData.savedBooks?.length
             ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
         </h2>
         <Row>
-          {userData.savedBooks.map((book) => {
+          {userData.savedBooks?.map((book) => {
             return (
               <Col md="4">
                 <Card key={book.bookId} border='dark'>
