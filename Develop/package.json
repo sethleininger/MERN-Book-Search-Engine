@@ -2,11 +2,8 @@
   "name": "mern-app",
   "version": "1.0.0",
   "description": "",
-  "homepage": "https://sethleininger.github.io/MERN-Book-Search-Engine",
   "main": "server/server.js",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "start": "node server - -ignore client",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
