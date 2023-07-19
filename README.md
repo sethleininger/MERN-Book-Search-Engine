@@ -31,3 +31,6 @@ npm i
 ## Usage
 
 Below is a screen shot of the app:
+<img width="1260" alt="Screenshot 2023-07-19 at 10 58 43 AM" src="https://github.com/sethleininger/MERN-Book-Search-Engine/assets/122936654/3f4375f4-df46-4038-ac16-1da497b8e851">
+
+
